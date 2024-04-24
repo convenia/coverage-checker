@@ -1,0 +1,25 @@
+name: 'Coverage Checker'
+description: 'Check Code Coverage from a previews generated clover file'
+inputs:
+  cloverXmlPath:
+    description: 'Path to clover file'
+    required: true
+    default: '.coverage/xml/clover.xml'
+  checkCoverage:
+    description: 'Coverage Threshold'
+    required: true
+    default: 90
+runs:
+  using: "composite"
+  steps:
+    - name: Install Checker
+      run: echo "PD9waHAKLy8gY292ZXJhZ2UtY2hlY2tlci5waHAKY29uc3QgR1JFRU4gPSAiXDAzM1s5Mm0iOwpjb25zdCBSRUQgPSAiXDAzM1s5MW0iOwpjb25zdCBFTkRDID0gIlwwMzNbMG0iOwoKJGlucHV0RmlsZSAgPSAkYXJndlsxXTsKJHBlcmNlbnRhZ2UgPSBtaW4oMTAwLCBtYXgoMCwgKGludCkgJGFyZ3ZbMl0pKTsKCmlmICghZmlsZV9leGlzdHMoJGlucHV0RmlsZSkpIHsKICAgIHRocm93IG5ldyBJbnZhbGlkQXJndW1lbnRFeGNlcHRpb24oJ0ludmFsaWQgaW5wdXQgZmlsZSBwcm92aWRlZCcpOwp9CgppZiAoISRwZXJjZW50YWdlKSB7CiAgICB0aHJvdyBuZXcgSW52YWxpZEFyZ3VtZW50RXhjZXB0aW9uKCdBbiBpbnRlZ2VyIGNoZWNrZWQgcGVyY2VudGFnZSBtdXN0IGJlIGdpdmVuIGFzIHNlY29uZCBwYXJhbWV0ZXInKTsKfQoKJHhtbCAgICAgICAgICAgICA9IG5ldyBTaW1wbGVYTUxFbGVtZW50KGZpbGVfZ2V0X2NvbnRlbnRzKCRpbnB1dEZpbGUpKTsKJG1ldHJpY3MgICAgICAgICA9ICR4bWwtPnhwYXRoKCcvL21ldHJpY3MnKTsKJHRvdGFsRWxlbWVudHMgICA9IDA7CiRjaGVja2VkRWxlbWVudHMgPSAwOwoKZm9yZWFjaCAoJG1ldHJpY3MgYXMgJG1ldHJpYykgewogICAgJHRvdGFsRWxlbWVudHMgICArPSAoaW50KSAkbWV0cmljWydlbGVtZW50cyddOwogICAgJGNoZWNrZWRFbGVtZW50cyArPSAoaW50KSAkbWV0cmljWydjb3ZlcmVkZWxlbWVudHMnXTsKfQoKJGNvdmVyYWdlID0gKCRjaGVja2VkRWxlbWVudHMgLyAkdG90YWxFbGVtZW50cykgKiAxMDA7CgppZiAoJGNvdmVyYWdlIDwgJHBlcmNlbnRhZ2UpIHsKICAgIGVjaG8gUkVEIC4gJ0NvZGUgY292ZXJhZ2UgaXMgJyAuICRjb3ZlcmFnZSAuICclLCB3aGljaCBpcyBiZWxvdyB0aGUgYWNjZXB0ZWQgJyAuICRwZXJjZW50YWdlIC4gJyUnIC4gRU5EQyAuIFBIUF9FT0w7CiAgICBleGl0KDEpOwp9CgplY2hvIEdSRUVOIC4gJ0NvZGUgY292ZXJhZ2UgaXMgJyAuICRjb3ZlcmFnZSAuICclIC0gT0shJyAuIEVOREMgLiBQSFBfRU9MOw==" | base64 -d > coverage-checker.php
+      shell: bash
+
+    - name: Check Coverage
+      run: php coverage-checker.php ${{ inputs.cloverXmlPath }} ${{ inputs.minCoverage }}
+      shell: bash
+
+    - name: Clean Up
+      run: rm coverage-checker.php
+      shell: bash
