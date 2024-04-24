@@ -5,7 +5,7 @@ inputs:
     description: 'Path to clover file'
     required: true
     default: '.coverage/xml/clover.xml'
-  checkCoverage:
+  minCoverage:
     description: 'Coverage Threshold'
     required: true
     default: 90
