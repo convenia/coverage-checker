@@ -1,11 +1,11 @@
 name: 'Coverage Checker'
 description: 'Check Code Coverage from a previews generated clover file'
 inputs:
-  cloverXmlPath:
+  clover-xml-path:
     description: 'Path to clover file'
     required: true
     default: '.coverage/xml/clover.xml'
-  minCoverage:
+  min-coverage:
     description: 'Coverage Threshold'
     required: true
     default: 90
@@ -17,7 +17,7 @@ runs:
       shell: sh
 
     - name: Check Coverage
-      run: php coverage-checker.php ${{ inputs.cloverXmlPath }} ${{ inputs.minCoverage }}
+      run: php coverage-checker.php ${{ inputs.clover-xml-path }} ${{ inputs.min-coverage }}
       shell: sh
 
     - name: Clean Up
