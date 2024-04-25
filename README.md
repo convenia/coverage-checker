@@ -13,7 +13,7 @@ This action validates if a pre generated coverage report with clover format is a
     clover-xml-path: ''
 
     # Coverage Threshold
-	# Default: 90
+    # Default: 90
     min-coverage: 90
 ```
 <!-- end usage -->
